@@ -1,0 +1,27 @@
+  <div class="example-container">
+    <mat-toolbar color="primary" class="example-toolbar">
+        <div class="toolbar-container">
+      <button mat-flat-button color="pirmary" (click)="snav.toggle()"><mat-icon aria-hidden="false" aria-label="menu icon" fontIcon="menu"></mat-icon>
+        Menu</button>
+      <h1 class="example-app-name">Responsive App</h1>
+    </div>
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="example-sidenav-container"
+                           [style.marginTop.px]="0">
+      <mat-sidenav #snav [mode]="'side'" 
+                   fixedTopGap="56">
+        <mat-nav-list class="dark-theme">
+          <h1 matSubheader>Subheader</h1>
+            <a mat-list-item>Link</a>
+          
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+    <app-footer></app-footer>
+  </div>
+

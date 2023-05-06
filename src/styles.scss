@@ -4,30 +4,36 @@
 
 @include mat.core();
 $my-color: (
- 50: #f0dec5,
- 100: #d4bc9b,
- 200: #d1aa75,
- 300: #c99957,
- 400: #dea250,
- 500: #cf913c,
- 600: #c78832,
- 700: #ab7326,
- 800: #945b0d,
- 900: #704101,
-
- contrast: (
-   50: rgba(black, 0.87),
-   100: rgba(black, 0.87),
-   200: rgba(black, 0.87),
-   300: white,
-   400: white,
-   500: white,
-   600: white,
-   700: white,
-   800: white,
-   900: white
-   // ... continues to 900
- )
+  50 : #f7f2e0,
+  100 : #ecdeb3,
+  200 : #dfc880,
+  300 : #d2b14d,
+  400 : #c9a126,
+  500 : #bf9000,
+  600 : #b98800,
+  700 : #b17d00,
+  800 : #a97300,
+  900 : #9b6100,
+  A100 : #ffe6c6,
+  A200 : #ffd093,
+  A400 : #ffba60,
+  A700 : #ffaf47,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #ffffff,
+      600 : #000000,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
 );
 
 $my-app-primary: mat.define-palette($my-color, 500, 200, 900);
@@ -59,6 +65,7 @@ $my-dark-theme: mat.define-dark-theme(
 html,
 body {
   height: 100%;
+  font-display: swap;
 }
 body {
   margin: 0;
@@ -68,9 +75,9 @@ body {
     margin: 16px;
 }
 
-.dark-theme {
-  @include mat.all-component-themes($my-dark-theme);
-}
+// .dark-theme {
+//   @include mat.($my-dark-theme);
+// }
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
   padding-top: 20px;
   padding-bottom: 8px;

@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-app",
+            "outputPath": "dist/first-angular-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -51,8 +51,8 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
-              "optimization": false,
+              "buildOptimizer": true,
+              "optimization": true,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
@@ -96,6 +96,15 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@jefiozie/ngx-aws-deploy:deploy",
+          "configurations": {
+            "production": {
+              "region": "eu-central-1",
+              "bucket": "borivojenrt416-first-app"
+            }
           }
         }
       }

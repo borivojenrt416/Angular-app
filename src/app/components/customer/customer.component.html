@@ -1,0 +1,36 @@
+<div class="container center">
+    <div class="inner">
+        <h3>1. Basic signal; Signal created from observable - control.valueChanges; computed signal;</h3>
+        <div>
+    <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput type="text" name="firstName" [formControl]="firstName" />
+        
+    </mat-form-field>
+
+    <p>Signal: <b>{{firstSignal()}}</b></p>
+    <p>SignalFromObservable$: <b>{{secondSignalFromObservable()}}</b></p>
+    <p>Computed signal: <b>{{computedSignal()}}</b></p>
+    <button mat-raised-button type="submit" (click)="setSignal()">Set signal:</button>
+</div>
+</div>
+
+
+<div class="inner">
+    <h3>2. Signal object person: </h3>
+    <p>firstName: <b>{{person().firstname}}</b></p>
+    <p>lastName: <b>{{person().lastname}}</b></p>
+    <p>mobile: <b>{{person().mobile}}</b></p>
+    <p>email: <b>{{person().email}}</b></p>
+    <p>username: <b>{{person().username}}</b></p>
+    <app-child [work]="person().work"></app-child>
+
+
+    <button mat-raised-button type="submit" (click)="mutateSignalObject()">Number change:</button>
+    <button mat-raised-button type="submit" (click)="increaseVacationDays()">Increase Vacation Days</button>
+
+</div>
+
+</div>
+
+

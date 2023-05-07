@@ -1,0 +1,16 @@
+.center {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 32px);
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    width: calc(100vw - 32px);
+}
+
+.inner {
+    margin-bottom: 50px;
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+}

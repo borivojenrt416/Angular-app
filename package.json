@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "dev": "lite-server --baseDir=dist/first-angular-app"
   },
   "private": true,
   "dependencies": {
@@ -14,6 +15,7 @@
     "@angular/common": "^16.0.0",
     "@angular/compiler": "^16.0.0",
     "@angular/core": "^16.0.0",
+    "@angular/fire": "^0.0.0",
     "@angular/forms": "^16.0.0",
     "@angular/material": "^16.0.0",
     "@angular/platform-browser": "^16.0.0",
@@ -27,13 +29,19 @@
     "@angular-devkit/build-angular": "^16.0.0",
     "@angular/cli": "~16.0.0",
     "@angular/compiler-cli": "^16.0.0",
+    "@jefiozie/ngx-aws-deploy": "^4.1.0",
     "@types/jasmine": "~4.3.0",
+    "cross-env": "^7.0.3",
+    "gulp": "^4.0.2",
+    "gzipper": "^7.2.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~4.9.4"
+    "lite-server": "^2.6.1",
+    "typescript": "~4.9.4",
+    "webpack-bundle-analyzer": "^4.8.0"
   }
 }

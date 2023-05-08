@@ -1,12 +1,31 @@
 import { Component, OnInit, Signal, WritableSignal, computed, effect, signal, untracked } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Subscription, map, tap } from 'rxjs';
+import { Observable, Subscription, delay, map, of, tap } from 'rxjs';
 import { ChildComponent } from '../child/child.component';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 
+const jobs: IWorkInterface[] = [
+  {
+    jobTitle: 'Driver',
+    salary: '500$',
+    vacationDays: 25
+  },
+  {
+    jobTitle: 'Lawyer',
+    salary: '1500$',
+    vacationDays: 30
+  },
+  {
+    jobTitle: 'Technical Support',
+    salary: '980$',
+    vacationDays: 27
+  }
+];
 export interface Person {
   firstname: string;
   lastname: string;
@@ -28,9 +47,11 @@ export interface IWorkInterface {
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss'],
   imports: [
+    CommonModule,
     ChildComponent,
     FormsModule,
     MatButtonModule,
+    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule
@@ -39,8 +60,14 @@ export interface IWorkInterface {
 export class CustomerComponent implements OnInit {
 
   firstName = new FormControl<string>('');
+  title = new FormControl<string>('');
+  salary = new FormControl<string>('');
+  vacationDays = new FormControl<number>(0);
+
   firstSignal: WritableSignal<string> = signal<string>('Initial value');
+
   subscription: Subscription = new Subscription();
+
   secondSignalFromObservable = toSignal(this.firstName.valueChanges.pipe(
     map(() => this.firstName.value)
   ))
@@ -49,6 +76,7 @@ export class CustomerComponent implements OnInit {
     return this.firstSignal() + '. This is computed signal!'
   });
 
+  // Second CARD
   public person: WritableSignal<Person> = signal({
     firstname: 'Michael',
     lastname: 'Michaelson',
@@ -61,6 +89,18 @@ export class CustomerComponent implements OnInit {
       vacationDays: 23
     }
   });
+
+
+  // THIRD CARD
+  public jobsSignal = signal(jobs);
+
+  computedJobs: Signal<IWorkInterface[]> = computed(() => {
+    console.log('jobs updated!');
+    return this.jobsSignal();
+  })
+
+
+  public getJobs$ = toObservable(this.computedJobs);
 
   constructor() {
     // Operation depending on signal "firstSignal"
@@ -75,10 +115,12 @@ export class CustomerComponent implements OnInit {
   }
 
   setSignal(): void {
-    console.log(this.firstName.value);
+
     if (this.firstName.value !== null) {
       this.firstSignal.set(this.firstName.value);
     }
+
+
   }
 
   mutateSignalObject(): void {
@@ -91,11 +133,22 @@ export class CustomerComponent implements OnInit {
     this.subscription = this.firstName.valueChanges.pipe(
       tap(res => console.log('res:', res))
     ).subscribe()
+
+    // this.subscriptionOf = this.getJobs$.subscribe();
   }
 
   public increaseVacationDays() {
     this.person.mutate((value: Person) => {
       value.work.vacationDays +=1;
     })
+  }
+
+  public addJob() {
+    this.jobsSignal.update((value) => value.concat({
+        jobTitle: this.title.value,
+        salary: this.salary.value,
+        vacationDays: this.vacationDays.value
+      } as IWorkInterface)
+    )
   }
 }

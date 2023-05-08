@@ -1,22 +1,23 @@
 <div class="container center">
-    <div class="inner">
+    <div class="container center">
+    <mat-card class="inner" style="background-color: cornsilk;">
         <h3>1. Basic signal; Signal created from observable - control.valueChanges; computed signal;</h3>
         <div>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="fill">
         <mat-label>First name</mat-label>
         <input matInput type="text" name="firstName" [formControl]="firstName" />
         
     </mat-form-field>
 
     <p>Signal: <b>{{firstSignal()}}</b></p>
-    <p>SignalFromObservable$: <b>{{secondSignalFromObservable()}}</b></p>
+    <p>SignalFromObservable$ - formControl valueChanges: <b>{{secondSignalFromObservable()}}</b></p>
     <p>Computed signal: <b>{{computedSignal()}}</b></p>
     <button mat-raised-button type="submit" (click)="setSignal()">Set signal:</button>
 </div>
-</div>
+</mat-card>
 
 
-<div class="inner">
+<mat-card class="inner" style="background-color:aliceblue;">
     <h3>2. Signal object person: </h3>
     <p>firstName: <b>{{person().firstname}}</b></p>
     <p>lastName: <b>{{person().lastname}}</b></p>
@@ -26,11 +27,40 @@
     <app-child [work]="person().work"></app-child>
 
 
-    <button mat-raised-button type="submit" (click)="mutateSignalObject()">Number change:</button>
-    <button mat-raised-button type="submit" (click)="increaseVacationDays()">Increase Vacation Days</button>
+    <button mat-raised-button type="submit" (click)="mutateSignalObject()" style="margin-bottom: 10px;">Change mobile number (signal mutate):</button>
+    <button mat-raised-button type="submit" (click)="increaseVacationDays()">Increase Vacation Days (on signal object, child component affect)</button>
+</mat-card>
 
+<mat-card class="inner" style="background-color:aliceblue;">
+
+    <h3>Observable from signal (jobs): </h3>
+    <p *ngFor="let job of (getJobs$ | async)">
+        Job:  <b>{{job.jobTitle}}</b>, Salary: <b>{{job.salary}}</b>, vacationDays: <b>{{job.vacationDays}}</b>
+    </p>
+
+    <h3>Computed (jobs): </h3>
+    <p *ngFor="let job of computedJobs()">
+        Job:  <b>{{job.jobTitle}}</b>, Salary: <b>{{job.salary}}</b>, vacationDays: <b>{{job.vacationDays}}</b>
+    </p>
+   
+    <mat-form-field appearance="fill">
+        <mat-label>Job</mat-label>
+        <input matInput type="text" name="title" [formControl]="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Salary</mat-label>
+        <input matInput type="text" name="salary" [formControl]="salary" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Vacation days</mat-label>
+        <input matInput type="text" name="vacationDays" [formControl]="vacationDays" />
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" (click)="addJob()" style="margin-bottom: 10px;">Add job (computed signal)</button>
+</mat-card>
 </div>
-
 </div>
 
 

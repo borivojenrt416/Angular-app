@@ -1,9 +1,9 @@
 .center {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: calc(100vh - 32px);
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     text-align: left;
     width: calc(100vw - 32px);
 }
@@ -13,4 +13,5 @@
     display: flex;
     width: 30%;
     flex-direction: column;
+    padding: 16px;
 }

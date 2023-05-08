@@ -13,6 +13,12 @@
     <p>SignalFromObservable$ - formControl valueChanges: <b>{{secondSignalFromObservable()}}</b></p>
     <p>Computed signal: <b>{{computedSignal()}}</b></p>
     <button mat-raised-button type="submit" (click)="setSignal()">Set signal:</button>
+
+    <h3>Number - Beh. Subject - Signal</h3>
+    <p>{{numberSignal()}}</p>
+
+    <button mat-raised-button type="submit" (click)="increaseNumber()">Increase number:</button>
+
 </div>
 </mat-card>
 

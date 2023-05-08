@@ -4,7 +4,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Observable, Subscription, delay, map, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, delay, map, of, tap } from 'rxjs';
 import { ChildComponent } from '../child/child.component';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
@@ -102,6 +102,11 @@ export class CustomerComponent implements OnInit {
 
   public getJobs$ = toObservable(this.computedJobs);
 
+  // behavior subject!
+  number$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+  numberSignal = toSignal(this.number$, {requireSync: true});
+
   constructor() {
     // Operation depending on signal "firstSignal"
     effect(() => {
@@ -116,7 +121,7 @@ export class CustomerComponent implements OnInit {
 
   setSignal(): void {
 
-    if (this.firstName.value !== null) {
+    if (this.firstName.value) {
       this.firstSignal.set(this.firstName.value);
     }
 
@@ -150,5 +155,9 @@ export class CustomerComponent implements OnInit {
         vacationDays: this.vacationDays.value
       } as IWorkInterface)
     )
+  }
+
+  increaseNumber() {
+    this.number$.next(this.number$.getValue() + 1);
   }
 }
